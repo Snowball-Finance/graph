@@ -1,0 +1,26 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: SnowGlobePngAvaxSnob
+    network: avalanche
+    source:
+      address: "0xF4072358C1E3d7841BD7AfDE31F61E17E8d99BE7"
+      abi: SnowGlobePngAvaxSnob
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+      abis:
+        - name: SnowGlobePngAvaxSnob
+          file: ./abis/SnowGlobePngAvaxSnob.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts
