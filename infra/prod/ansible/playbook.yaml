@@ -1,0 +1,13 @@
+- hosts: graph_node
+  become: yes
+  tasks: 
+    - name: Copy nginx config file
+      copy: 
+        file: ./
+        dest: ./
+        mode: 0755
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: latest
+        

@@ -1,0 +1,13 @@
+- hosts: the_graph_server
+  become: yes
+  tasks:
+    - name: copy docker-compose file
+      copy:
+        src: ../../../docker-compose.yml
+        dest: ./
+    - name: deploy Docker Compose stack
+    
+      community.docker.docker_compose:
+        project_src: ./
+        files:
+          - docker-compose.yml

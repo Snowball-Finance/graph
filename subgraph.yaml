@@ -1,13 +1,13 @@
-specVersion: 0.0.1
+specVersion: 0.0.2
 schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: SnowGlobePngAvaxSnob
+    name: SnowGlobe
     network: avalanche
     source:
       address: "0xF4072358C1E3d7841BD7AfDE31F61E17E8d99BE7"
-      abi: SnowGlobePngAvaxSnob
+      abi: SnowGlobe
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -15,12 +15,765 @@ dataSources:
       entities:
         - Approval
         - Transfer
+        - Withdraw
+        - Deposit
       abis:
-        - name: SnowGlobePngAvaxSnob
-          file: ./abis/SnowGlobePngAvaxSnob.json
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/mapping.ts
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: pngAvax
+    network: avalanche
+    source:
+      address: "0x621207093D2e65Bf3aC55dD8Bf0351B980A63815"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxWow
+    network: avalanche
+    source:
+      address: "0xca26bF455974B85df3Ed9cfdbf0B620D616738BF"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxTime
+    network: avalanche
+    source:
+      address: "0x2b48ff2cA4374562CDEea82534519076105663F2"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxOoe
+    network: avalanche
+    source:
+      address: "0xFe128e46E6C450662d4Dcf361e740e787cDBce50"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxSpore
+    network: avalanche
+    source:
+      address: "0x27f8FE86a513bAAF18B59D3dD15218Cc629640Fc"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxVee
+    network: avalanche
+    source:
+      address: "0xc8AA857291B6622A212D4C32eecCcFBd6D06E685"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxTeddy
+    network: avalanche
+    source:
+      address: "0x42E1CDd48884C9027E965600B4A725a91D27255b"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxWalbt
+    network: avalanche
+    source:
+      address: "0x322094FDB02677E7a993E735826c9E183fc605a6"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxDyp
+    network: avalanche
+    source:
+      address: "0xf4a591BeaC3A4D864C3293477bBD3f86880ADa16"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+  
+  - kind: ethereum
+    name: avaxOrbs
+    network: avalanche
+    source:
+      address: "0xD4ADAD0cA62bC5B504DcF302c85E649E6175424f"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxApein
+    network: avalanche
+    source:
+      address: "0x192ae260676Ba79ccc57A6f4Ed692Bfe371658b9"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxYay
+    network: avalanche
+    source:
+      address: "0xD7601D15ce8D207Ef01f2e45c6e24Fc5A34c393f"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxQi
+    network: avalanche
+    source:
+      address: "0xeEc21abC6daD38A8515a7C3388E5ef962Cd960e6"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+  
+  - kind: ethereum
+    name: avaxHusky
+    network: avalanche
+    source:
+      address: "0x150Bc67072c2dB7c55D83302B7dA7D930Eed1c3E"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+  
+  - kind: ethereum
+    name: avaxHct
+    network: avalanche
+    source:
+      address: "0xe720fca4cfF42F03eC01A12F23592b731A43EDCf"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxRoco
+    network: avalanche
+    source:
+      address: "0x026402B96A3EBDeaE03B70E4C197D70a8f33B295"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxImx
+    network: avalanche
+    source:
+      address: "0x28a5e50d0841d7AC5d858A76a1C54f27baB6Eda9"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxXava
+    network: avalanche
+    source:
+      address: "0x6AB8DAC517c244f53D86a155a14064E86c2dE653"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+  
+  - kind: ethereum
+    name: avaxTusd
+    network: avalanche
+    source:
+      address: "0xfe1A87Cc4a2144f7eBb7d731bE80bF0e4CC6E909"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+  
+  - kind: ethereum
+    name: avaxInsur
+    network: avalanche
+    source:
+      address: "0x433de3528fe278a6B16072dd5389df8af3DcdD8c"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxKlo
+    network: avalanche
+    source:
+      address: "0x17FD2418bcae447Ab383a437e4991F5536646681"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+  
+  - kind: ethereum
+    name: avaxFrax
+    network: avalanche
+    source:
+      address: "0x8a9d06976073715461D66d595523a06C7B5c5313"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxPefi
+    network: avalanche
+    source:
+      address: "0x5fb4d08bCBD444fDD5a0545fdB0C86783D186382"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxwBTC.e
+    network: avalanche
+    source:
+      address: "0x04A3B139fcD004b2A4f957135a3f387124982133"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxLink.e
+    network: avalanche
+    source:
+      address: "0x08D5Cfaf58a10D306937aAa8B0d2eb40466f7461"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+  
+  - kind: ethereum
+    name: avaxUSDT.e
+    network: avalanche
+    source:
+      address: "0x7CC8068AB5FC2D8c843C4b1A6572a1d1E742D7c8"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxDAI.e
+    network: avalanche
+    source:
+      address: "0x56A6e103D860FBb991eF1Afd24250562a292b2a5"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxUSDC.e
+    network: avalanche
+    source:
+      address: "0xd63359ff51BF1217730ae2C37979242B1a3f7c53"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+  
+  - kind: ethereum
+    name: avaxJoe
+    network: avalanche
+    source:
+      address: "0x98C64DE8118eF067Fe8e3756d77FF134270A94Ad"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+
+  - kind: ethereum
+    name: avaxEth.e
+    network: avalanche
+    source:
+      address: "0xfEC005280ec0870A5dB1924588aE532743CEb90F"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts
+

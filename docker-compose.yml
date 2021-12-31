@@ -1,0 +1,17 @@
+version: '3'
+services:
+  graph-node:
+    image: graphprotocol/graph-node
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+      - "8020:8020"
+    environment:
+      postgres_host: postgres
+      postgres_user: graphNode
+      postgres_pass: docker
+      postgres_db: graphDB
+      GRAPH_LOG: info
+      ipfs: "https://ipfs.snowapi.net/"
+      ethereum: "avalanche:https://api.avax.network/ext/bc/C/rpc"
+      ETHEREUM_POLLING_INTERVAL: 1000

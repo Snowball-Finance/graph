@@ -1,10 +1,11 @@
 {
-  "name": " snow-graph",
+  "name": "snowgraph",
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/  snow-graph",
+    "create-dev": "graph create   --node http://54.184.252.52:8020/ snow-graph",
+    "deploy-dev": "graph deploy   --node http://54.184.252.52:8020/ snow-graph",
     "create-local": "graph create --node http://localhost:8020/  snow-graph",
     "remove-local": "graph remove --node http://localhost:8020/  snow-graph",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001  snow-graph"

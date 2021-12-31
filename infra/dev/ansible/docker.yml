@@ -1,0 +1,77 @@
+- hosts: the_graph_server
+  become: true
+  tasks:
+    - name: copy docker-compose file
+      copy:
+        src: ../../../docker-compose.yml
+        dest: ./
+  
+    - name: Install docker packages
+      apt:
+        name: "{{item}}"
+        state: present
+        update_cache: yes
+      with_items:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
+      tags:
+        - docker
+  
+    - name: Add docker official GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+      tags:
+        - docker
+  
+    - name: Verify fingerprint
+      apt_key:
+        id: 0EBFCD88
+        state: present
+      tags:
+        - docker
+
+    - name: Set up the stable repository
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+        state: present
+        update_cache: yes
+      tags:
+        - docker
+
+    - name: Update apt packages
+      apt:
+        update_cache: yes
+      tags:
+        - docker
+   
+    - name: Install Docker
+      apt:
+        name: docker-ce    
+        state: present
+        update_cache: yes
+      tags:
+        - docker
+    
+    - name: Add remote "ubuntu" user to "docker" group
+      remote_user:
+      user:
+        name: "ubuntu"
+        groups: 
+          - docker
+        append: yes
+      tags:
+        - docker
+
+    - name: Install docker-compose
+      get_url:
+        url: https://github.com/docker/compose/releases/download/1.25.1-rc1/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: 'u+x,g+x'
+
+    - name: run the docker-compose file
+      shell:
+        cmd: "docker-compose -f docker-compose.yml up -d"
+        chdir: "app"
