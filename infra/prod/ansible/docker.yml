@@ -3,7 +3,7 @@
   tasks:
     - name: copy docker-compose file
       copy:
-        src: ../../../docker-compose.dev.yml
+        src: ../../../docker-compose.yml
         dest: ./
   
     - name: Install docker packages
@@ -73,5 +73,5 @@
 
     - name: run the docker-compose file
       shell:
-        cmd: "docker-compose -f docker-compose.dev.yml up -d"
+        cmd: "docker-compose -f docker-compose.yml up -d"
         chdir: "./"

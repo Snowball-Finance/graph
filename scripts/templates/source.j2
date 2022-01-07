@@ -1,0 +1,24 @@
+  - kind: ethereum
+    name: {{name}}
+    network: avalanche
+    source:
+      address: "{{address}}"
+      abi: SnowGlobe
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Transfer
+        - Withdraw
+        - Deposit
+      abis:
+        - name: SnowGlobe
+          file: ./abis/SnowGlobe.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping/SnowGlobe.ts

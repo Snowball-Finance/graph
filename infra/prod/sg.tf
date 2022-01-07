@@ -10,36 +10,22 @@ resource "aws_security_group" "node_sg" {
 
   ingress {
     protocol    = "tcp"
-    from_port   = 9650
-    to_port     = 9650
+    from_port   = 8020
+    to_port     = 8020
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+   ingress {
+    protocol    = "tcp"
+    from_port   = 8001
+    to_port     = 8001
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
     protocol    = "tcp"
-    from_port   = 9090
-    to_port     = 9090
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    protocol    = "tcp"
-    from_port   = 3000
-    to_port     = 3000
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    protocol    = "tcp"
-    from_port   = 80
-    to_port     = 80
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    protocol    = "tcp"
-    from_port   = 9651
-    to_port     = 9651
+    from_port   = 8000
+    to_port     = 8000
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -57,9 +43,8 @@ resource "aws_security_group" "node_sg" {
   }
 }
 
-
 resource "aws_security_group" "https" {
-  name        = "${local.env}-${local.project}-${local.node}-ALB-SG"
+  name        = "${local.env}-${local.project}-${local.node}-alb-sg"
   description = " ${local.project} ${local.node} HTTPS security group"
   vpc_id      = data.terraform_remote_state.vpc.outputs.id
   ingress {
@@ -81,7 +66,7 @@ resource "aws_security_group" "https" {
   }
 
   tags = {
-    Name        = "${local.env}-${local.project}-${local.node}-ALB-SG"
+    Name        = "${local.env}-${local.project}-${local.node}-alb-sg"
     Environment = local.env
   }
 }
@@ -131,7 +116,7 @@ resource "aws_iam_policy" "user_connect" {
 EOF
 
   depends_on = [
-    aws_spot_instance_request.first
+    aws_spot_instance_request.this
   ]
 }
 
