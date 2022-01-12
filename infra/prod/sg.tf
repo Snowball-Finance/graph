@@ -1,5 +1,5 @@
 resource "aws_security_group" "node_sg" {
-  name   = "${local.env}-${local.project}-bc-node-SG"
+  name   = "${local.env}-${local.project}-graph-node-SG"
   vpc_id = data.terraform_remote_state.vpc.outputs.id
   ingress {
     protocol    = "tcp"
@@ -72,7 +72,7 @@ resource "aws_security_group" "https" {
 }
 
 resource "aws_iam_role" "role" {
-  name               = "${local.env}-${local.project}-bc-node-IAM-Role"
+  name               = "${local.env}-${local.project}-graph-node-IAM-Role"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -90,7 +90,7 @@ EOF
 }
 
 resource "aws_iam_policy" "user_connect" {
-  name        = "${local.env}-${local.project}-bc-node-user-instance-connect"
+  name        = "${local.env}-${local.project}-graph-node-user-instance-connect"
   path        = "/"
   description = "Allows use of EC2 instance connect"
 
@@ -121,7 +121,7 @@ EOF
 }
 
 resource "aws_iam_policy_attachment" "instance_connect" {
-  name       = "${local.env}-${local.project}-bc-node-instance-connect-policy"
+  name       = "${local.env}-${local.project}-graph-node-instance-connect-policy"
   policy_arn = aws_iam_policy.user_connect.arn
   groups     = ["prod-snowball-user-group"]
 }
@@ -132,6 +132,6 @@ resource "aws_iam_role_policy_attachment" "policy_attachment" {
 }
 
 resource "aws_iam_instance_profile" "profile" {
-  name = "${local.env}-${local.project}-bc-node-instance-profile"
+  name = "${local.env}-${local.project}-graph-node-instance-profile"
   role = aws_iam_role.role.id
 }

@@ -4,8 +4,8 @@ locals {
   project       = "snowball"
   node          = "graph-node"
   env           = "prod"
-  domain_name = "graph"
-  node_port   = 8000
+  domain_name   = "graph"
+  node_port     = 8000
 }
 
 provider "aws" {

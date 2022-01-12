@@ -1,4 +1,4 @@
-- hosts: the_graph_server
+- hosts: graph
   become: true
   tasks:
     - name: copy docker-compose file
