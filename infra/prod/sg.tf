@@ -1,52 +1,8 @@
-resource "aws_security_group" "node_sg" {
-  name   = "${local.env}-${local.project}-graph-node-SG"
-  vpc_id = data.terraform_remote_state.vpc.outputs.id
-  ingress {
-    protocol    = "tcp"
-    from_port   = 22
-    to_port     = 22
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    protocol    = "tcp"
-    from_port   = 8020
-    to_port     = 8020
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-   ingress {
-    protocol    = "tcp"
-    from_port   = 8001
-    to_port     = 8001
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    protocol    = "tcp"
-    from_port   = 8000
-    to_port     = 8000
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    protocol    = -1
-    from_port   = 0
-    to_port     = 0
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name        = "${local.env}-${local.project}-${local.node}-SG"
-    Environment = local.env
-    Project     = local.project
-  }
-}
-
-resource "aws_security_group" "https" {
-  name        = "${local.env}-${local.project}-${local.node}-alb-sg"
-  description = " ${local.project} ${local.node} HTTPS security group"
+resource "aws_security_group" "ecs_alb_https_sg" {
+  name        = "${local.cluster_name}-${local.service_name}-alb-sg"
+  description = "Security group for ALB to cluster"
   vpc_id      = data.terraform_remote_state.vpc.outputs.id
+
   ingress {
     from_port   = 443
     to_port     = 443
@@ -66,72 +22,57 @@ resource "aws_security_group" "https" {
   }
 
   tags = {
-    Name        = "${local.env}-${local.project}-${local.node}-alb-sg"
+    Name        = "${local.cluster_name}-${local.service_name}-alb-sg"
     Environment = local.env
   }
 }
 
-resource "aws_iam_role" "role" {
-  name               = "${local.env}-${local.project}-graph-node-IAM-Role"
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Service": ["ec2.amazonaws.com", "ssm.amazonaws.com" ]
-      },
-      "Action": "sts:AssumeRole"
-    }
-  ]
-}
-EOF
-}
+resource "aws_security_group" "ecs_task_sg" {
+  name   = "${local.cluster_name}-${local.service_name}-task-sg"
+  vpc_id = data.terraform_remote_state.vpc.outputs.id
 
-resource "aws_iam_policy" "user_connect" {
-  name        = "${local.env}-${local.project}-graph-node-user-instance-connect"
-  path        = "/"
-  description = "Allows use of EC2 instance connect"
+  ingress {
+    from_port   = local.graph_port
+    to_port     = local.graph_port
+    protocol    = "TCP"
+    cidr_blocks = ["${data.terraform_remote_state.vpc.outputs.vpc_cidr_block}"]
+  }
 
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-  		"Effect": "Allow",
-  		"Action": "ec2-instance-connect:SendSSHPublicKey",
-  		"Resource": "*",
-  		"Condition": {
-  			"StringEquals": { "ec2:osuser": "ec2-user" }
-  		}
-  	},
-		{
-			"Effect": "Allow",
-			"Action": "ec2:DescribeInstances",
-			"Resource": "*"
-		}
-  ]
-}
-EOF
+  ingress {
+    from_port   = local.admin_port
+    to_port     = local.admin_port
+    protocol    = "TCP"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
-  depends_on = [
-    aws_spot_instance_request.this
-  ]
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+
+  tags = {
+    Name        = "${local.cluster_name}-${local.service_name}-task-sg"
+    Project     = local.cluster_name
+    environment = local.env
+  }
 }
 
-resource "aws_iam_policy_attachment" "instance_connect" {
-  name       = "${local.env}-${local.project}-graph-node-instance-connect-policy"
-  policy_arn = aws_iam_policy.user_connect.arn
-  groups     = ["prod-snowball-user-group"]
+data "aws_security_group" "rds_write_client_sg" {
+  name   = "${local.env}-graph-write-master-client-RDS"
+  vpc_id = data.terraform_remote_state.vpc.outputs.id
 }
 
-resource "aws_iam_role_policy_attachment" "policy_attachment" {
-  role       = aws_iam_role.role.id
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
-}
-
-resource "aws_iam_instance_profile" "profile" {
-  name = "${local.env}-${local.project}-graph-node-instance-profile"
-  role = aws_iam_role.role.id
+resource "aws_security_group_rule" "to_client_write_db_sg" {
+  type                     = "ingress"
+  protocol                 = "TCP"
+  from_port                = local.db_port
+  to_port                  = local.db_port
+  source_security_group_id = aws_security_group.ecs_task_sg.id
+  security_group_id        = data.aws_security_group.rds_write_client_sg.id
 }

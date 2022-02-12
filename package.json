@@ -4,9 +4,8 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "create": "graph create  --node {{host}}:8020/ snow-graph",
-    "deploy": "graph deploy  --node {{host}}:8020/ snow-graph",
-
+    "create": "graph create  --node https://graph.snowapi.net/admin snow-graph",
+    "deploy": "graph deploy  --node https://graph.snowapi.net/admin snow-graph",
     "create-dev": "graph create   --node {{host}}/:8020/ snow-graph",
     "deploy-dev": "graph deploy   --node {{host}}/:8020/ snow-graph",
     "create-local": "graph create --node http://localhost:8020/  snow-graph",
