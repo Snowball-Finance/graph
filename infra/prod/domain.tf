@@ -2,27 +2,27 @@ data "aws_route53_zone" "snowapi_net" {
   name = "snowapi.net"
 }
 
-resource "aws_route53_record" "node" {
+resource "aws_route53_record" "domain" {
   name    = local.domain_name
   type    = "A"
   zone_id = data.aws_route53_zone.snowapi_net.zone_id
   alias {
     evaluate_target_health = false
-    name                   = aws_alb.this.dns_name
-    zone_id                = aws_alb.this.zone_id
+    name                   = aws_alb.alb.dns_name
+    zone_id                = aws_alb.alb.zone_id
   }
 }
 
 resource "aws_acm_certificate" "cert" {
   domain_name       = "${local.domain_name}.${data.aws_route53_zone.snowapi_net.name}"
   validation_method = "DNS"
-
+  
   lifecycle {
     create_before_destroy = true
   }
 
   tags = {
-    Name = "${local.env}-${local.project}-${local.node}-certificate"
+    Name = "${local.service_name}-certificate"
   }
 }
 
