@@ -28,13 +28,31 @@ import {
   
   function handleDeposit(event:TransferEvent): void { 
     const contract = SnowGlobe.bind(event.address);
-    const lpValue = event.params.value.times(contract.getRatio()).div(bigInt.fromString("1000000000000000000"));
-    store.createDeposit(event, lpValue, contract.getRatio());
+
+    let globeRatio:bigInt;
+    try {
+      globeRatio = contract.getRatio();
+    } catch (error) {
+      //safemath error if globe is empty
+      globeRatio = bigInt.fromString("1000000000000000000");
+    }
+
+    const lpValue = event.params.value.times(globeRatio).div(bigInt.fromString("1000000000000000000"));
+    store.createDeposit(event, lpValue, globeRatio);
   }
 
   function handleWithdraw(event:TransferEvent): void { 
     const contract = SnowGlobe.bind(event.address);
-    const lpValue = event.params.value.times(contract.getRatio()).div(bigInt.fromString("1000000000000000000"));
-    store.createWithdraw(event, lpValue, contract.getRatio());
+    
+    let globeRatio:bigInt;
+    try {
+      globeRatio = contract.getRatio();
+    } catch (error) {
+      //safemath error if globe is empty
+      globeRatio = bigInt.fromString("1000000000000000000");
+    }
+
+    const lpValue = event.params.value.times(globeRatio).div(bigInt.fromString("1000000000000000000"));
+    store.createWithdraw(event, lpValue, globeRatio);
   }
   
