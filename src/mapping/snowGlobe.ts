@@ -34,7 +34,7 @@ import {
       globeRatio = contract.getRatio();
     } catch (error) {
       //safemath error if globe is empty
-      globeRatio = 1;
+      globeRatio = bigInt.fromString("1000000000000000000");
     }
 
     const lpValue = event.params.value.times(globeRatio).div(bigInt.fromString("1000000000000000000"));
@@ -49,7 +49,7 @@ import {
       globeRatio = contract.getRatio();
     } catch (error) {
       //safemath error if globe is empty
-      globeRatio = 1;
+      globeRatio = bigInt.fromString("1000000000000000000");
     }
 
     const lpValue = event.params.value.times(globeRatio).div(bigInt.fromString("1000000000000000000"));
