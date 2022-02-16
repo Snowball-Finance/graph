@@ -55,6 +55,14 @@ locals {
           name  = "GRAPH_LOG",
           value = "info"
         },
+        {
+          name  = "RUST_LOG",
+          value = "info"
+        },
+        {
+          name = "RUST_BACKTRACE",
+          value = "full"
+        },
          {
           name  = "ipfs",
           value = "https://ipfs.snowapi.net/"
