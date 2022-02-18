@@ -10,6 +10,8 @@ type Transfer @entity {
   from: Bytes! # address
   to: Bytes! # address
   value: BigInt! # uint256
+  snowglobeAddress: String! #Snowglobe address 
+  block: BigInt! # blocknumber
 }
 
 type Withdraw @entity {
@@ -18,7 +20,9 @@ type Withdraw @entity {
   value: BigInt! # uint256
   lpValue:BigInt! # ratio*value
   ratio: BigInt! # ratio from contract by calling contract.getRatio()
-   hash: String!
+  hash: String! # tx hash
+  snowglobeAddress: String! #Snowglobe address 
+  block: BigInt! # blocknumber
 }
 
 type Deposit @entity {
@@ -27,5 +31,7 @@ type Deposit @entity {
   value: BigInt! # uint256
   lpValue:BigInt! # ratio*value
   ratio: BigInt! # ratio from contract by calling contract.getRatio()
-  hash: String!
+  hash: String! # tx hash
+  snowglobeAddress: String! #Snowglobe address  
+  block: BigInt! # blocknumber
 }
