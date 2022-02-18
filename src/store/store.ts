@@ -17,6 +17,8 @@ export function createTransfer(event: TransferEvent): void  {
   entity.from = event.params.from;
   entity.to = event.params.to;
   entity.value = event.params.value;
+  entity.snowglobeAddress = event.address.toString();
+  entity.block = event.block.number;
   entity.save();
 }
 
@@ -26,7 +28,9 @@ export function createDeposit(event: TransferEvent, lpValue: BigInt, ratio:BigIn
   entity.lpValue = lpValue;
   entity.value = event.params.value;
   entity.hash = event.transaction.hash.toHex();
-  entity.ratio = ratio
+  entity.ratio = ratio;
+  entity.snowglobeAddress = event.address.toString();
+  entity.block = event.block.number;
   entity.save();
 }
 
@@ -36,7 +40,9 @@ export function createWithdraw(event: TransferEvent, lpValue: BigInt, ratio:BigI
   entity.lpValue = lpValue;
   entity.value = event.params.value;
   entity.hash = event.transaction.hash.toHex();
-  entity.ratio = ratio
+  entity.ratio = ratio;
+  entity.snowglobeAddress = event.address.toString();
+  entity.block = event.block.number;
   entity.save();
 }
 

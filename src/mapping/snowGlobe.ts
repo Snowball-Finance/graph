@@ -15,25 +15,24 @@ import {
   }
   
   export function handleTransfer(event: TransferEvent): void {
-    // create the transfer regardless of the event type
-    store.createTransfer(event);
     // minting here is zero
     if (event.params.from == zeroAddress) { 
       handleDeposit(event);
-    }
-    if (event.params.to == zeroAddress)  { 
+    } else if (event.params.to == zeroAddress)  { 
       handleWithdraw(event);
+    } else {
+      //we only want to register transfers between valid addresses
+      store.createTransfer(event);
     }
   }
   
   function handleDeposit(event:TransferEvent): void { 
     const contract = SnowGlobe.bind(event.address);
 
-    let globeRatio:bigInt;
-    try {
+    let globeRatio;
+    if(contract.balance() > bigInt.fromString("0")){
       globeRatio = contract.getRatio();
-    } catch (error) {
-      //safemath error if globe is empty
+    } else {
       globeRatio = bigInt.fromString("1000000000000000000");
     }
 
@@ -44,11 +43,10 @@ import {
   function handleWithdraw(event:TransferEvent): void { 
     const contract = SnowGlobe.bind(event.address);
     
-    let globeRatio:bigInt;
-    try {
+    let globeRatio;
+    if(contract.balance() > bigInt.fromString("0")){
       globeRatio = contract.getRatio();
-    } catch (error) {
-      //safemath error if globe is empty
+    } else {
       globeRatio = bigInt.fromString("1000000000000000000");
     }
 
