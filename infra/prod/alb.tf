@@ -3,6 +3,7 @@ resource "aws_alb" "alb" {
   drop_invalid_header_fields = true
   security_groups            = ["${aws_security_group.ecs_alb_https_sg.id}"]
   subnets                    = data.terraform_remote_state.vpc.outputs.public_subnets
+  idle_timeout               = 300
   tags = {
     Name = "${local.service_name}-alb"
   }
@@ -31,7 +32,7 @@ resource "aws_alb_target_group" "default" {
   vpc_id      = data.terraform_remote_state.vpc.outputs.id
   target_type = "ip"
   protocol    = "HTTP"
-
+  
   lifecycle {
     create_before_destroy = true
   }
