@@ -5,6 +5,7 @@ locals {
   domain_name        = "graph"
   graph_port         = 8000
   admin_port         = 8020
+  health             = 8030
   desired_task_count = "1"
   db_port            = "5432"
   memory             = 16384 // 16GB
@@ -55,6 +56,14 @@ locals {
           name  = "GRAPH_LOG",
           value = "info"
         },
+        {
+          name  = "RUST_LOG",
+          value = "info"
+        },
+        {
+          name = "RUST_BACKTRACE",
+          value = "full"
+        },
          {
           name  = "ipfs",
           value = "https://ipfs.snowapi.net/"
@@ -64,8 +73,8 @@ locals {
           value = "avalanche:https://api.avax.network/ext/bc/C/rpc"
         },
          {
-         "name"      = "ETHEREUM_POLLING_INTERVAL",
-         "value"     = "1000"
+         name      = "ETHEREUM_POLLING_INTERVAL",
+         value     = "1000"
         }
       ],
       logConfiguration = {

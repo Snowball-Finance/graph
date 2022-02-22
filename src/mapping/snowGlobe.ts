@@ -5,7 +5,7 @@ import {
   } from "../../generated/SnowGlobe/SnowGlobe"
   import * as store from '../store/store'
   import {
-    Address, bigInt,
+    Address,bigInt,BigInt
   } from "@graphprotocol/graph-ts";
 
   const zeroAddress = Address.fromString("0x0000000000000000000000000000000000000000")
@@ -28,29 +28,29 @@ import {
   
   function handleDeposit(event:TransferEvent): void { 
     const contract = SnowGlobe.bind(event.address);
-
-    let globeRatio;
-    if(contract.balance() > bigInt.fromString("0")){
+    let globeRatio:BigInt
+    
+    if(contract.balance() > bigInt.fromString("0")) {
       globeRatio = contract.getRatio();
     } else {
-      globeRatio = bigInt.fromString("1000000000000000000");
+      globeRatio = BigInt.fromString("1000000000000000000");
     }
 
-    const lpValue = event.params.value.times(globeRatio).div(bigInt.fromString("1000000000000000000"));
+    const lpValue = event.params.value.times(globeRatio).div(BigInt.fromString("1000000000000000000"));
     store.createDeposit(event, lpValue, globeRatio);
   }
 
   function handleWithdraw(event:TransferEvent): void { 
     const contract = SnowGlobe.bind(event.address);
-    
-    let globeRatio;
-    if(contract.balance() > bigInt.fromString("0")){
+    let globeRatio:BigInt
+
+    if(contract.balance() > bigInt.fromString("0")) {
       globeRatio = contract.getRatio();
     } else {
-      globeRatio = bigInt.fromString("1000000000000000000");
+      globeRatio = BigInt.fromString("1000000000000000000");
     }
 
-    const lpValue = event.params.value.times(globeRatio).div(bigInt.fromString("1000000000000000000"));
+    const lpValue = event.params.value.times(globeRatio).div(BigInt.fromString("1000000000000000000"));
     store.createWithdraw(event, lpValue, globeRatio);
   }
   
